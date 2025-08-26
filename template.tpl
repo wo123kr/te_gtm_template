@@ -1,4 +1,16 @@
-﻿___INFO___
+﻿___TERMS_OF_SERVICE___
+
+By using this template, you agree to the following terms and conditions:
+
+1. **Purpose of Use**: This template is provided for deploying and using the Thinking Engine JavaScript SDK in Google Tag Manager.
+2. **Data Collection**: Data collected through this template is processed according to Thinking Engine's Terms of Service and Privacy Policy.
+3. **Limitation of Liability**: The template creators are not liable for any losses or damages arising from the use of this template.
+4. **Compliance**: Users must comply with all applicable laws and regulations when using this template.
+5. **Support**: Support for this template is provided through the GitHub repository.
+For more information, please refer to the official Thinking Engine documentation.
+
+
+___INFO___
 
 {
   "type": "TAG",
@@ -3342,23 +3354,6 @@ ___WEB_PERMISSIONS___
 ___TESTS___
 
 scenarios: []
-
-
-___TERMS_OF_SERVICE___
-
-By using this template, you agree to the following terms and conditions:
-
-1. **Purpose of Use**: This template is provided for deploying and using the Thinking Engine JavaScript SDK in Google Tag Manager.
-
-2. **Data Collection**: Data collected through this template is processed according to Thinking Engine's Terms of Service and Privacy Policy.
-
-3. **Limitation of Liability**: The template creators are not liable for any losses or damages arising from the use of this template.
-
-4. **Compliance**: Users must comply with all applicable laws and regulations when using this template.
-
-5. **Support**: Support for this template is provided through the GitHub repository.
-
-For more information, please refer to the official Thinking Engine documentation.
 
 
 ___NOTES___
