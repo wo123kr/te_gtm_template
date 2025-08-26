@@ -1,10 +1,9 @@
 ﻿___TERMS_OF_SERVICE___
 
-By using this template, you agree to the following terms and conditions:
-
-This template is provided for deploying and using the Thinking Engine JavaScript SDK in Google Tag Manager. Data collected through this template is processed according to Thinking Engine's Terms of Service and Privacy Policy. The template creators are not liable for any losses or damages arising from the use of this template. Users must comply with all applicable laws and regulations when using this template. Support for this template is provided through the GitHub repository.
-
-For more information, please refer to the official Thinking Engine documentation.
+By creating or modifying this file you agree to Google Tag Manager's Community
+Template Gallery Developer Terms of Service available at
+https://developers.google.com/tag-manager/gallery-tos (or such other URL as
+Google may provide), as modified from time to time.
 
 
 ___INFO___
