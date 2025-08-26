@@ -3346,19 +3346,19 @@ scenarios: []
 
 ___TERMS_OF_SERVICE___
 
-이 템플릿을 사용함으로써 다음 조건에 동의하는 것으로 간주됩니다:
+By using this template, you agree to the following terms and conditions:
 
-1. **사용 목적**: 이 템플릿은 Thinking Engine JavaScript SDK를 Google Tag Manager에서 배포하고 사용하기 위해 제공됩니다.
+1. **Purpose of Use**: This template is provided for deploying and using the Thinking Engine JavaScript SDK in Google Tag Manager.
 
-2. **데이터 수집**: 이 템플릿을 통해 수집되는 데이터는 Thinking Engine 서비스의 이용약관과 개인정보처리방침에 따라 처리됩니다.
+2. **Data Collection**: Data collected through this template is processed according to Thinking Engine's Terms of Service and Privacy Policy.
 
-3. **책임 제한**: 템플릿 제작자는 이 템플릿 사용으로 인한 어떠한 손실이나 손해에 대해서도 책임을 지지 않습니다.
+3. **Limitation of Liability**: The template creators are not liable for any losses or damages arising from the use of this template.
 
-4. **준수 사항**: 사용자는 관련 법률 및 규정을 준수하여 이 템플릿을 사용해야 합니다.
+4. **Compliance**: Users must comply with all applicable laws and regulations when using this template.
 
-5. **지원**: 이 템플릿에 대한 지원은 GitHub 저장소를 통해 제공됩니다.
+5. **Support**: Support for this template is provided through the GitHub repository.
 
-자세한 내용은 Thinking Engine 공식 문서를 참조하십시오.
+For more information, please refer to the official Thinking Engine documentation.
 
 
 ___NOTES___
