@@ -1,0 +1,38 @@
+homepage: "https://github.com/wo123kr/te_gtm_template"
+documentation: "https://github.com/wo123kr/te_gtm_template/blob/main/README.md"
+versions:
+  - sha: "main" # Will be updated by the build script
+    changeNotes: |
+      ## 🚀 Thinking Engine All-in-One Template v2.0.0
+      
+      ### ✨ Major Features
+      - **All-in-One Solution**: Combined initialization and event tracking in a single template
+      - **Enhanced UI/UX**: Emoji-coded categories, intuitive field organization, and comprehensive help text
+      - **Smart Validation**: Real-time input validation with contextual error messages
+      - **Comprehensive Coverage**: Support for all Thinking Engine SDK features
+      
+      ### 📊 Supported Tag Types
+      - 🚀 SDK Initialization with advanced configuration
+      - 📊 Event Tracking (track, trackFirst, trackUpdate, trackOverwrite, timeEvent)
+      - 👤 User Management (login, logout, setDistinctId)
+      - ⚙️ User Properties (userSet, userSetOnce, userAdd, userDel, userDelete, userAppend, userUniqAppend)
+      - 🌍 Properties Management (setSuperProperties, unsetSuperProperties, clearSuperProperties, setPageProperty)
+      
+      ### 🎨 User Experience Improvements
+      - Logical grouping with collapsible sections
+      - Field hints with practical examples
+      - Contextual help with usage scenarios
+      - Improved validation with specific error messages
+      - GTM variable integration support
+      
+      ### 🔧 Technical Enhancements
+      - Optimized for GTM Template Gallery standards
+      - Comprehensive error handling
+      - Improved SDK instance management
+      - Better debugging capabilities
+      
+      ### 📚 Documentation
+      - Complete setup and usage guide
+      - Configuration examples for all features
+      - Best practices and troubleshooting
+      - Advanced usage scenarios
