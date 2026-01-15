@@ -1,12 +1,4 @@
-﻿___TERMS_OF_SERVICE___
-
-By creating or modifying this file you agree to Google Tag Manager's Community
-Template Gallery Developer Terms of Service available at
-https://developers.google.com/tag-manager/gallery-tos (or such other URL as
-Google may provide), as modified from time to time.
-
-
-___INFO___
+﻿___INFO___
 
 {
   "type": "TAG",
@@ -374,7 +366,7 @@ ___TEMPLATE_PARAMETERS___
             "valueHint": "{{Page Title}}, product, article 등"
           }
         ],
-        "help": "📄 페이지뷰 이벤트와 함께 전송할 페이지 관련 정보들입니다. <br>💡 자동 포함되는 속성: 페이지 URL, 페이지 제목, 리퍼러 등 <br>🎯 추가 예시: 페이지 카테고리, 콘텐츠 유형, 작성자 등",
+        "help": "📄 페이지뷰 이벤트와 함께 전송할 페이지 관련 정보들입니다. \u003cbr\u003e💡 자동 포함되는 속성: 페이지 URL, 페이지 제목, 리퍼러 등 \u003cbr\u003e🎯 추가 예시: 페이지 카테고리, 콘텐츠 유형, 작성자 등",
         "newRowButtonText": "➕ 페이지뷰 속성 추가"
       }
     ]
@@ -1185,22 +1177,25 @@ function checkSDKAvailability(instanceName) {
 }
 
 /**
- * 인스턴스 생성 또는 확인 (eval 사용 안함)
+ * 인스턴스 생성 또는 확인 (initInstance 제거 - 중복 초기화 방지)
  */
 function ensureInstance(instanceName, sdkCheck) {
   if (sdkCheck.global) {
-    log('Creating missing instance via direct method: ' + instanceName);
-    callInWindow('thinkingdata.initInstance', instanceName);
+    log('Binding thinkingdata to instance name: ' + instanceName);
+    setInWindow(instanceName, sdkCheck.global);
     return true;
   }
-  
+
   // Window 기반으로 재시도
   if (sdkCheck.method === 'window') {
-    log('Attempting to create instance based on Window status');
-    callInWindow('thinkingdata.initInstance', instanceName);
-    return true;
+    log('SDK ready, binding instance: ' + instanceName);
+    const tdInstance = copyFromWindow('thinkingdata');
+    if (tdInstance) {
+      setInWindow(instanceName, tdInstance);
+      return true;
+    }
   }
-  
+
   return false;
 }
 
@@ -1243,21 +1238,17 @@ function initializeTE() {
     };
 
     callInWindow('thinkingdata.init', config);
-    
-    // 직접 인스턴스 생성 (thinkingdata.initInstance가 작동하지 않는 경우 대비)
+
+    // thinkingdata 객체를 인스턴스 이름으로 바인딩 (initInstance 제거 - 중복 초기화 방지)
     const tdInstance = copyFromWindow('thinkingdata');
     if (tdInstance) {
-      log('Creating instance manually using thinkingdata object');
-      callInWindow('thinkingdata.initInstance', instanceName);
-      
-      // 추가적으로 직접 바인딩 시도
+      log('Binding thinkingdata to instance name: ' + instanceName);
       setInWindow(instanceName, tdInstance);
     } else {
-      log('thinkingdata object not found, using initInstance method');
-      callInWindow('thinkingdata.initInstance', instanceName);
+      log('Warning: thinkingdata object not found after init');
     }
-    
-    log('SDK initialized and instance created: ' + instanceName);
+
+    log('SDK initialized: ' + instanceName);
     
     // Window에 SDK 준비 상태 설정 (GTM 호환)
     setInWindow('te_sdk_ready', true);
