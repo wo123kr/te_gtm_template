@@ -1,4 +1,12 @@
-﻿___INFO___
+___TERMS_OF_SERVICE___
+
+By creating or modifying this file you agree to Google Tag Manager's Community
+Template Gallery Developer Terms of Service available at
+https://developers.google.com/tag-manager/gallery-tos (or such other URL as
+Google may provide), as modified from time to time.
+
+
+___INFO___
 
 {
   "type": "TAG",
@@ -215,13 +223,224 @@ ___TEMPLATE_PARAMETERS___
         "subParams": [
           {
             "type": "CHECKBOX",
-            "name": "enablePageShowHide",
-            "checkboxText": "📱 페이지 표시/숨김 이벤트 자동 수집",
+            "name": "enablePageShow",
+            "checkboxText": "📱 페이지 표시 이벤트 자동 수집 (ta_page_show)",
             "simpleValueType": true,
             "defaultValue": true,
-            "help": "🎯 사용자가 페이지를 떠나고 돌아올 때를 자동으로 추적합니다. \u003cbr\u003e📊 수집되는 이벤트: ta_page_show, ta_page_hide \u003cbr\u003e💡 권장: 대부분의 경우 활성화하여 사용자 행동 패턴을 파악하세요"
+            "help": "🎯 사용자가 페이지로 돌아왔을 때를 자동으로 추적합니다. \u003cbr\u003e📊 수집되는 이벤트: ta_page_show \u003cbr\u003e💡 탭 전환, 창 포커스 복귀 시 발생"
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "enablePageHide",
+            "checkboxText": "📱 페이지 숨김 이벤트 자동 수집 (ta_page_hide)",
+            "simpleValueType": true,
+            "defaultValue": true,
+            "help": "🎯 사용자가 페이지를 떠날 때를 자동으로 추적합니다. \u003cbr\u003e📊 수집되는 이벤트: ta_page_hide \u003cbr\u003e💡 탭 전환, 창 최소화, 다른 앱으로 이동 시 발생"
           }
         ]
+      },
+      {
+        "type": "GROUP",
+        "name": "disablePresetPropsGroup",
+        "displayName": "🚫 프리셋 속성 수집 비활성화",
+        "groupStyle": "ZIPPY_CLOSED",
+        "subParams": [
+          {
+            "type": "CHECKBOX",
+            "name": "disablePresetEnabled",
+            "checkboxText": "프리셋 속성 비활성화 사용",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "help": "⚠️ 규제 준수 또는 비즈니스 요구사항에 따라 특정 프리셋 속성의 수집을 차단합니다. \u003cbr\u003e💡 비활성화할 속성을 아래에서 선택하세요."
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableIp",
+            "checkboxText": "#ip (IP 주소)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "help": "🌐 유저의 IP 주소를 비활성화합니다. IP 기반 지리 정보(#country, #province, #city)도 함께 생성되지 않습니다.",
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableCountry",
+            "checkboxText": "#country (국가)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableCountryCode",
+            "checkboxText": "#country_code (국가 코드)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableProvince",
+            "checkboxText": "#province (주/도)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableCity",
+            "checkboxText": "#city (도시)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableOs",
+            "checkboxText": "#os (운영체제)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableLib",
+            "checkboxText": "#lib (SDK 유형)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableLibVersion",
+            "checkboxText": "#lib_version (SDK 버전)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableScreenHeight",
+            "checkboxText": "#screen_height (화면 높이)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableScreenWidth",
+            "checkboxText": "#screen_width (화면 너비)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableBrowser",
+            "checkboxText": "#browser (브라우저)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableBrowserVersion",
+            "checkboxText": "#browser_version (브라우저 버전)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableSystemLanguage",
+            "checkboxText": "#system_language (시스템 언어)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableZoneOffset",
+            "checkboxText": "#zone_offset (시간대 오프셋)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableUa",
+            "checkboxText": "#ua (User Agent)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableUtm",
+            "checkboxText": "#utm (UTM 파라미터)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableReferrer",
+            "checkboxText": "#referrer (리퍼러 URL)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableReferrerHost",
+            "checkboxText": "#referrer_host (리퍼러 호스트)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableUrl",
+            "checkboxText": "#url (페이지 URL)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableUrlPath",
+            "checkboxText": "#url_path (URL 경로)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableTitle",
+            "checkboxText": "#title (페이지 제목)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableElementType",
+            "checkboxText": "#element_type (요소 유형)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableDeviceId",
+            "checkboxText": "#device_id (디바이스 ID)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "help": "⚠️ 디바이스 ID를 비활성화하면 최초 이벤트(First Event) 사용 시 반드시 first_check_id를 설정해야 합니다.",
+            "enablingConditions": [{"paramName": "disablePresetEnabled", "paramValue": true, "type": "EQUALS"}]
+          }
+        ],
+        "help": "🔒 규제 준수 또는 비즈니스 요구사항에 따라 특정 프리셋 속성의 수집을 차단할 수 있습니다. \u003cbr\u003e⚠️ 디바이스 ID를 비활성화한 경우, 최초 이벤트(First Event) 사용 시 반드시 first_check_id를 설정해야 합니다."
       },
       {
         "type": "GROUP",
@@ -1231,11 +1450,44 @@ function initializeTE() {
       appId: data.appId,
       serverUrl: data.serverUrl || SERVER_URL_DEFAULT,
       autoTrack: {
-        pageShow: !!data.enablePageShowHide,
-        pageHide: !!data.enablePageShowHide
+        pageShow: !!data.enablePageShow,
+        pageHide: !!data.enablePageHide
       },
       showLog: !!data.enableSdkLogging
     };
+
+    // 프리셋 속성 비활성화 설정
+    if (data.disablePresetEnabled) {
+      const disableList = [];
+      if (data.disableIp) disableList.push('#ip');
+      if (data.disableCountry) disableList.push('#country');
+      if (data.disableCountryCode) disableList.push('#country_code');
+      if (data.disableProvince) disableList.push('#province');
+      if (data.disableCity) disableList.push('#city');
+      if (data.disableOs) disableList.push('#os');
+      if (data.disableLib) disableList.push('#lib');
+      if (data.disableLibVersion) disableList.push('#lib_version');
+      if (data.disableScreenHeight) disableList.push('#screen_height');
+      if (data.disableScreenWidth) disableList.push('#screen_width');
+      if (data.disableBrowser) disableList.push('#browser');
+      if (data.disableBrowserVersion) disableList.push('#browser_version');
+      if (data.disableSystemLanguage) disableList.push('#system_language');
+      if (data.disableZoneOffset) disableList.push('#zone_offset');
+      if (data.disableUa) disableList.push('#ua');
+      if (data.disableUtm) disableList.push('#utm');
+      if (data.disableReferrer) disableList.push('#referrer');
+      if (data.disableReferrerHost) disableList.push('#referrer_host');
+      if (data.disableUrl) disableList.push('#url');
+      if (data.disableUrlPath) disableList.push('#url_path');
+      if (data.disableTitle) disableList.push('#title');
+      if (data.disableElementType) disableList.push('#element_type');
+      if (data.disableDeviceId) disableList.push('#device_id');
+
+      if (disableList.length > 0) {
+        config.disablePresetProperties = disableList;
+        log('Disabled preset properties: ' + disableList.join(', '));
+      }
+    }
 
     callInWindow('thinkingdata.init', config);
 
