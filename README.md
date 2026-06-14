@@ -26,7 +26,9 @@ Unlike traditional templates that require separate initialization and event tags
 
 #### 🚀 **Initialization**
 - SDK initialization with customizable configuration
-- Auto-tracking settings (pageview, page show/hide)
+- Auto-tracking settings (page show/hide, single-page pageview, element click)
+- Auto-track common properties (static props applied to all auto-collected events)
+- Remote config fetch toggle (`disableRConfig`)
 - Debug logging controls
 
 #### 📊 **Event Tracking**
@@ -53,6 +55,12 @@ Unlike traditional templates that require separate initialization and event tags
 - **Global Properties** (`setSuperProperties`): Apply to all events
 - **Remove Global Properties** (`unsetSuperProperties`, `clearSuperProperties`)
 - **Page Properties** (`setPageProperty`): Page-specific context
+
+#### 🖱️ **Auto-collection & SPA** *(new in v2.1.0)*
+- **Element Click Tracking** (`trackLink`): bind click listeners to elements by tag / class / id
+- **Single-Page View Refresh** (`autoTrackSinglePage`): re-trigger page view on SPA route changes
+
+> Auto-collected events `ta_pageview` (SDK v2.4.0+) and `ta_page_click` (SDK v2.5.0+) are configured in the **Initialization** tag's auto-tracking settings and are **off by default** (opt-in) to avoid unexpected data volume.
 
 ## 🛠️ **Installation & Usage**
 
@@ -142,6 +150,34 @@ Page Properties:
   - content_type: "detail"
 ```
 
+### Element Click Tracking (`trackLink`)
+Bind click listeners to elements matching tag/class/id rules:
+```
+Tag Type: 🖱️ 요소 클릭 추적 (trackLink)
+Event Name: link_click
+Element Rules:
+  - tag: a
+  - tag: button
+  - class: cta-button
+Event Properties:
+  - section: "header"
+```
+> Listeners are attached only to elements present when the tag fires. For elements created later (e.g. after route changes), fire `trackLink` again.
+
+### Single-Page App Page Views (`autoTrackSinglePage`)
+Re-trigger a page view on SPA route changes (fire on a History Change trigger):
+```
+Tag Type: 📄 단일 페이지 조회 갱신 (autoTrackSinglePage)
+```
+
+### Auto-collected Events (Initialization tag)
+Enable in the init tag's **🤖 자동 수집 설정** group:
+```
+☑ 📄 ta_pageview   (single-page view, SDK v2.4.0+)
+☑ 🖱️ ta_page_click (element click, SDK v2.5.0+)
+🔧 Common properties: source = {{Traffic Source}}
+```
+
 ## 🎯 **Best Practices**
 
 ### 1. **Initialization First**
@@ -197,6 +233,6 @@ This project is licensed under the Apache License, Version 2.0. See the [LICENSE
 
 ---
 
-**Template Version**: 2.0.0  
-**Compatible with**: Thinking Engine JavaScript SDK  
+**Template Version**: 2.1.0  
+**Compatible with**: Thinking Engine JavaScript SDK (`thinkingdata-browser` v2.x; `ta_pageview` requires v2.4.0+, `ta_page_click` requires v2.5.0+)  
 **GTM Template API Version**: Latest  
