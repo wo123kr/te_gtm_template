@@ -47,6 +47,14 @@ ___TEMPLATE_PARAMETERS___
         "displayValue": "📄 페이지뷰 이벤트 (pageview)"
       },
       {
+        "value": "autoTrackSinglePage",
+        "displayValue": "📄 단일 페이지 조회 갱신 (autoTrackSinglePage)"
+      },
+      {
+        "value": "trackLink",
+        "displayValue": "🖱️ 요소 클릭 추적 (trackLink)"
+      },
+      {
         "value": "trackFirst",
         "displayValue": "📊 최초 이벤트 (trackFirst)"
       },
@@ -236,6 +244,46 @@ ___TEMPLATE_PARAMETERS___
             "simpleValueType": true,
             "defaultValue": true,
             "help": "🎯 사용자가 페이지를 떠날 때를 자동으로 추적합니다. \u003cbr\u003e📊 수집되는 이벤트: ta_page_hide \u003cbr\u003e💡 탭 전환, 창 최소화, 다른 앱으로 이동 시 발생"
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "enablePageView",
+            "checkboxText": "📄 단일 페이지 조회 이벤트 자동 수집 (ta_pageview)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "help": "🎯 SPA(Vue·React 등)의 페이지 조회를 자동으로 추적합니다. \u003cbr\u003e📊 수집되는 이벤트: ta_pageview \u003cbr\u003e💡 라우트 전환 시에도 동작 (SDK v2.4.0 이상 필요) \u003cbr\u003e⚠️ 기본 비활성화"
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "enablePageClick",
+            "checkboxText": "🖱️ 요소 클릭 이벤트 자동 수집 (ta_page_click)",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "help": "🎯 onclick 또는 td-track-id가 설정된 요소의 클릭을 자동으로 추적합니다. \u003cbr\u003e📊 수집되는 이벤트: ta_page_click \u003cbr\u003e💡 td-track-ignore로 특정 요소 제외 가능 (SDK v2.5.0 이상 필요) \u003cbr\u003e⚠️ 클릭량이 많으면 데이터가 급증할 수 있어 기본 비활성화"
+          },
+          {
+            "type": "SIMPLE_TABLE",
+            "name": "autoTrackProperties",
+            "displayName": "🔧 자동 수집 이벤트 공통 속성 (선택사항)",
+            "simpleTableColumns": [
+              {
+                "defaultValue": "",
+                "displayName": "🏷️ 속성 이름",
+                "name": "name",
+                "type": "TEXT",
+                "isUnique": true,
+                "valueHint": "source, page_group 등"
+              },
+              {
+                "defaultValue": "",
+                "displayName": "💼 속성 값",
+                "name": "value",
+                "type": "TEXT",
+                "valueHint": "{{변수}}, web 등"
+              }
+            ],
+            "help": "📊 모든 자동 수집 이벤트(ta_page_show/ta_page_hide/ta_pageview/ta_page_click)에 함께 전송할 정적 속성입니다. \u003cbr\u003e💡 GTM 변수 사용 가능: {{variable_name}} 형태로 입력",
+            "newRowButtonText": "➕ 속성 추가"
           }
         ]
       },
@@ -455,6 +503,14 @@ ___TEMPLATE_PARAMETERS___
             "simpleValueType": true,
             "help": "⚠️ 개발 환경에서만 활성화하세요. \u003cbr\u003e📝 브라우저 콘솔에서 SDK 동작 상태를 확인할 수 있습니다.",
             "defaultValue": false
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "disableRConfig",
+            "checkboxText": "🚫 원격 설정 가져오기 비활성화 (disableRConfig)",
+            "simpleValueType": true,
+            "help": "⚙️ SDK 초기화 시 서버에서 원격 설정 정보를 가져오지 않습니다. \u003cbr\u003e💡 보통은 비활성화 상태로 두세요. \u003cbr\u003e📝 SDK 동작을 로컬 설정으로만 고정할 때 활성화",
+            "defaultValue": false
           }
         ]
       }
@@ -547,6 +603,84 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "help": "📊 이벤트와 함께 전송할 추가 정보들입니다. \u003cbr\u003e💡 GTM 변수 사용 가능: {{variable_name}} 형태로 입력",
+        "newRowButtonText": "➕ 속성 추가"
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
+    "name": "trackLinkGroup",
+    "displayName": "🖱️ 요소 클릭 추적 설정 (trackLink)",
+    "groupStyle": "ZIPPY_OPEN",
+    "enablingConditions": [
+      {
+        "paramName": "tagType",
+        "paramValue": "trackLink",
+        "type": "EQUALS"
+      }
+    ],
+    "subParams": [
+      {
+        "type": "TEXT",
+        "name": "trackLinkEventName",
+        "displayName": "🏷️ 이벤트 이름 (필수)",
+        "simpleValueType": true,
+        "help": "🖱️ 클릭 시 전송할 이벤트 이름입니다. \u003cbr\u003e💡 예시: click, link_click \u003cbr\u003e⚙️ 규칙: 영문자로 시작, 영문/숫자/_ 만, 50자 이내",
+        "valueValidators": [
+          { "type": "NON_EMPTY", "errorMessage": "❌ 이벤트 이름은 필수 입력 항목입니다." },
+          { "type": "REGEX", "args": ["^[a-zA-Z][a-zA-Z0-9_]*$"], "errorMessage": "❌ 영문자로 시작하고 영문자, 숫자, 언더스코어(_)만 사용 가능합니다." },
+          { "type": "STRING_LENGTH", "args": [1, 50], "errorMessage": "❌ 이벤트 이름은 1-50자 사이여야 합니다." }
+        ]
+      },
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "trackLinkRules",
+        "displayName": "🎯 모니터링할 요소 규칙 (필수)",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "tag",
+            "displayName": "선택자 종류",
+            "name": "selectorType",
+            "type": "SELECT",
+            "selectItems": [
+              { "value": "tag", "displayValue": "HTML 태그 (tag)" },
+              { "value": "class", "displayValue": "클래스 (class)" },
+              { "value": "id", "displayValue": "ID (id)" }
+            ]
+          },
+          {
+            "defaultValue": "",
+            "displayName": "값",
+            "name": "selectorValue",
+            "type": "TEXT",
+            "valueHint": "a, button / my-class / my-id"
+          }
+        ],
+        "help": "🎯 클릭을 추적할 요소를 지정합니다. \u003cbr\u003e💡 예시: 태그=a, 태그=button \u003cbr\u003e⚠️ 호출 시점에 존재하는 요소에만 리스너가 추가됩니다 (이후 생성된 요소는 재호출 필요)",
+        "newRowButtonText": "➕ 규칙 추가"
+      },
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "trackLinkProperties",
+        "displayName": "🔧 이벤트 속성 (선택사항)",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "🏷️ 속성 이름",
+            "name": "name",
+            "type": "TEXT",
+            "isUnique": true,
+            "valueHint": "production, name 등"
+          },
+          {
+            "defaultValue": "",
+            "displayName": "💼 속성 값",
+            "name": "value",
+            "type": "TEXT",
+            "valueHint": "{{변수}}, 제품명 등"
+          }
+        ],
+        "help": "📊 클릭 이벤트와 함께 전송할 속성입니다. \u003cbr\u003e💡 name 미지정 시 td-name → innerHTML → value 순으로 요소 식별자가 자동 설정됩니다.",
         "newRowButtonText": "➕ 속성 추가"
       }
     ]
@@ -1451,9 +1585,12 @@ function initializeTE() {
       serverUrl: data.serverUrl || SERVER_URL_DEFAULT,
       autoTrack: {
         pageShow: !!data.enablePageShow,
-        pageHide: !!data.enablePageHide
+        pageHide: !!data.enablePageHide,
+        pageView: !!data.enablePageView,
+        pageClick: !!data.enablePageClick
       },
-      showLog: !!data.enableSdkLogging
+      showLog: !!data.enableSdkLogging,
+      disableRConfig: !!data.disableRConfig
     };
 
     // 프리셋 속성 비활성화 설정
@@ -1487,6 +1624,12 @@ function initializeTE() {
         config.disablePresetProperties = disableList;
         log('Disabled preset properties: ' + disableList.join(', '));
       }
+    }
+
+    // 자동 수집 이벤트 공통 속성 (autoTrack.properties)
+    if (hasProperties(data.autoTrackProperties)) {
+      config.autoTrack.properties = convertPropertiesToObject(data.autoTrackProperties);
+      log('Auto-track custom properties applied');
     }
 
     callInWindow('thinkingdata.init', config);
@@ -1707,6 +1850,33 @@ function executeEventSending() {
       callTE1('setPageProperty', pageProperties);
       break;
       
+    case 'trackLink':
+      if (!data.trackLinkEventName) {
+        return fail('Event name is required for trackLink');
+      }
+      const linkRule = {};
+      const ruleRows = data.trackLinkRules;
+      if (ruleRows && ruleRows.length) {
+        let ri = 0;
+        while (ri < ruleRows.length) {
+          const rr = ruleRows[ri];
+          if (rr && rr.selectorType && rr.selectorValue) {
+            if (!linkRule[rr.selectorType]) {
+              linkRule[rr.selectorType] = [];
+            }
+            linkRule[rr.selectorType].push(rr.selectorValue);
+          }
+          ri++;
+        }
+      }
+      const linkProps = convertPropertiesToObject(data.trackLinkProperties) || {};
+      callTE3('trackLink', linkRule, data.trackLinkEventName, linkProps);
+      break;
+
+    case 'autoTrackSinglePage':
+      callTE0('autoTrackSinglePage');
+      break;
+
     default:
       return fail('Unknown tag type: ' + data.tagType);
   }
@@ -1743,6 +1913,21 @@ function callTE2(method, arg1, arg2) {
   } else {
     log('Instance not found, using thinkingdata.' + method + ' directly', {arg1: arg1, arg2: arg2});
     callInWindow('thinkingdata.' + method, arg1, arg2);
+    success('Successfully called thinkingdata.' + method);
+  }
+}
+
+function callTE3(method, arg1, arg2, arg3) {
+  const instanceName = data.instanceNameOther || INSTANCE_NAME_DEFAULT;
+
+  const actualInstance = copyFromWindow(instanceName);
+  if (actualInstance) {
+    log('Calling ' + instanceName + '.' + method, {arg1: arg1, arg2: arg2, arg3: arg3});
+    callInWindow(instanceName + '.' + method, arg1, arg2, arg3);
+    success('Successfully called ' + instanceName + '.' + method);
+  } else {
+    log('Instance not found, using thinkingdata.' + method + ' directly', {arg1: arg1, arg2: arg2, arg3: arg3});
+    callInWindow('thinkingdata.' + method, arg1, arg2, arg3);
     success('Successfully called thinkingdata.' + method);
   }
 }
@@ -3435,6 +3620,66 @@ ___WEB_PERMISSIONS___
                     "type": 8,
                     "boolean": true
                   }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  { "type": 1, "string": "key" },
+                  { "type": 1, "string": "read" },
+                  { "type": 1, "string": "write" },
+                  { "type": 1, "string": "execute" }
+                ],
+                "mapValue": [
+                  { "type": 1, "string": "ta.trackLink" },
+                  { "type": 8, "boolean": false },
+                  { "type": 8, "boolean": false },
+                  { "type": 8, "boolean": true }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  { "type": 1, "string": "key" },
+                  { "type": 1, "string": "read" },
+                  { "type": 1, "string": "write" },
+                  { "type": 1, "string": "execute" }
+                ],
+                "mapValue": [
+                  { "type": 1, "string": "thinkingdata.trackLink" },
+                  { "type": 8, "boolean": false },
+                  { "type": 8, "boolean": false },
+                  { "type": 8, "boolean": true }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  { "type": 1, "string": "key" },
+                  { "type": 1, "string": "read" },
+                  { "type": 1, "string": "write" },
+                  { "type": 1, "string": "execute" }
+                ],
+                "mapValue": [
+                  { "type": 1, "string": "ta.autoTrackSinglePage" },
+                  { "type": 8, "boolean": false },
+                  { "type": 8, "boolean": false },
+                  { "type": 8, "boolean": true }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  { "type": 1, "string": "key" },
+                  { "type": 1, "string": "read" },
+                  { "type": 1, "string": "write" },
+                  { "type": 1, "string": "execute" }
+                ],
+                "mapValue": [
+                  { "type": 1, "string": "thinkingdata.autoTrackSinglePage" },
+                  { "type": 8, "boolean": false },
+                  { "type": 8, "boolean": false },
+                  { "type": 8, "boolean": true }
                 ]
               }
             ]
